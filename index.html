@@ -1,371 +1,283 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ARYAN | My World</title>
+<title>Aryan | Portfolio</title>
 
 <style>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 body {
-    min-height: 100vh;
-    background: #020005;
+    background: #050510;
     color: white;
-    font-family: Arial, sans-serif;
+    min-height: 100vh;
     overflow-x: hidden;
 }
 
-/* ---------- ANIMATED BACKGROUND ---------- */
-
-.background {
+/* Background glow */
+body::before {
+    content: "";
     position: fixed;
-    inset: 0;
-    overflow: hidden;
-    z-index: -1;
-    background:
-        radial-gradient(circle at 50% 50%, #16002f 0%, #050008 45%, #000 100%);
-}
-
-.glow {
-    position: absolute;
     width: 350px;
     height: 350px;
-    background: #7b00ff;
-    filter: blur(130px);
+    background: #6a00ff;
+    filter: blur(150px);
     opacity: .25;
-    border-radius: 50%;
-    animation: moveGlow 8s infinite alternate ease-in-out;
-}
-
-.glow:nth-child(1) {
     top: 10%;
     left: 10%;
+    z-index: -1;
 }
 
-.glow:nth-child(2) {
+body::after {
+    content: "";
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    background: #00eaff;
+    filter: blur(150px);
+    opacity: .18;
+    bottom: 5%;
     right: 5%;
-    bottom: 10%;
-    animation-delay: -4s;
+    z-index: -1;
 }
 
-@keyframes moveGlow {
-    0% {
-        transform: translate(0, 0) scale(1);
-    }
-
-    100% {
-        transform: translate(150px, -80px) scale(1.4);
-    }
-}
-
-/* Floating particles */
-
-.particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: #a855ff;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #9d00ff;
-    animation: float 6s infinite linear;
-}
-
-@keyframes float {
-    from {
-        transform: translateY(110vh);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    80% {
-        opacity: 1;
-    }
-
-    to {
-        transform: translateY(-10vh);
-        opacity: 0;
-    }
-}
-
-/* ---------- NAVBAR ---------- */
-
+/* Navbar */
 nav {
-    height: 90px;
+    width: 100%;
+    padding: 20px 8%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 0 7%;
-    border-bottom: 1px solid rgba(160, 60, 255, .25);
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 .logo {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
-    letter-spacing: 4px;
+    color: #00eaff;
+    text-shadow: 0 0 15px #00eaff;
 }
 
-.logo span {
-    color: #a855ff;
-    text-shadow: 0 0 20px #8b00ff;
-}
-
-.links {
-    display: flex;
-    gap: 35px;
-}
-
-.links a {
+nav a {
     color: white;
     text-decoration: none;
-    font-size: 15px;
-    transition: .3s;
+    margin-left: 20px;
 }
 
-.links a:hover {
-    color: #b45cff;
-    text-shadow: 0 0 15px #a000ff;
-}
-
-/* ---------- HERO ---------- */
-
+/* Hero */
 .hero {
-    min-height: calc(100vh - 90px);
+    min-height: 85vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 40px 20px;
+    padding: 30px;
 }
 
-.content {
-    max-width: 800px;
+.hero h1 {
+    font-size: clamp(45px, 10vw, 90px);
+    color: white;
+    text-shadow:
+        0 0 10px #00eaff,
+        0 0 30px #6a00ff;
 }
 
-.welcome {
-    display: inline-block;
-    padding: 12px 28px;
-    border: 1px solid #7e20ff;
+.hero p {
+    margin: 15px 0 30px;
+    color: #bbb;
+    font-size: 18px;
+}
+
+/* Explore button */
+.explore-btn {
+    padding: 15px 35px;
+    border: 2px solid #00eaff;
     border-radius: 30px;
-    color: #bd7aff;
-    letter-spacing: 6px;
-    font-size: 13px;
-    box-shadow: 0 0 25px rgba(130, 0, 255, .2);
-    animation: pulse 2s infinite alternate;
-}
-
-@keyframes pulse {
-    from {
-        box-shadow: 0 0 10px rgba(130, 0, 255, .2);
-    }
-
-    to {
-        box-shadow: 0 0 30px rgba(130, 0, 255, .6);
-    }
-}
-
-h1 {
-    margin-top: 30px;
-    font-size: clamp(65px, 13vw, 140px);
-    letter-spacing: 10px;
-    line-height: 1;
-    text-shadow: 0 0 30px rgba(160, 0, 255, .5);
-}
-
-h1 span {
-    color: #a855ff;
-}
-
-.tagline {
-    margin-top: 25px;
-    font-size: 20px;
-    letter-spacing: 9px;
-    color: #c889ff;
-}
-
-.description {
-    max-width: 600px;
-    margin: 30px auto;
-    color: #aaa;
-    line-height: 1.8;
+    background: transparent;
+    color: #00eaff;
     font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0,234,255,.5);
+    transition: .3s;
 }
 
-/* ---------- BUTTON ---------- */
+.explore-btn:hover {
+    background: #00eaff;
+    color: #050510;
+    box-shadow: 0 0 30px #00eaff;
+    transform: scale(1.05);
+}
 
-button {
-    margin-top: 15px;
-    padding: 17px 40px;
-    border-radius: 40px;
-    border: 1px solid #a855ff;
+/* Upload section */
+#uploadSection {
+    display: none;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.upload-box {
+    max-width: 500px;
+    margin: auto;
+    padding: 35px;
+    border: 1px solid #00eaff;
+    border-radius: 20px;
+    background: rgba(255,255,255,.04);
+    box-shadow: 0 0 30px rgba(0,234,255,.15);
+}
+
+.upload-box h2 {
+    color: #00eaff;
+    margin-bottom: 15px;
+}
+
+.upload-box p {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+/* File input */
+input[type="file"] {
+    display: none;
+}
+
+.upload-label {
+    display: inline-block;
+    padding: 13px 25px;
+    border-radius: 25px;
+    border: 1px solid #a000ff;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(160,0,255,.5);
+    transition: .3s;
+}
+
+.upload-label:hover {
+    background: #a000ff;
+    box-shadow: 0 0 30px #a000ff;
+}
+
+/* Image preview */
+#preview {
+    display: none;
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    margin-top: 25px;
+    border-radius: 15px;
+    border: 2px solid #00eaff;
+    box-shadow: 0 0 25px rgba(0,234,255,.5);
+}
+
+/* Back button */
+.back-btn {
+    margin-top: 25px;
+    padding: 10px 22px;
+    border: 1px solid #555;
+    border-radius: 20px;
     background: transparent;
     color: white;
-    font-size: 15px;
-    letter-spacing: 2px;
     cursor: pointer;
-    box-shadow: 0 0 20px rgba(150, 0, 255, .3);
-    transition: .3s;
-}
-
-button:hover {
-    background: #8b00ff;
-    box-shadow:
-        0 0 20px #8b00ff,
-        0 0 50px #8b00ff;
-    transform: translateY(-4px);
-}
-
-/* ---------- SOCIAL ---------- */
-
-.social {
-    margin-top: 40px;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.social a {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #6d20a8;
-    border-radius: 12px;
-    color: white;
-    text-decoration: none;
-    transition: .3s;
-}
-
-.social a:hover {
-    transform: translateY(-7px);
-    background: #6200a8;
-    box-shadow: 0 0 25px #8b00ff;
-}
-
-/* ---------- MOBILE ---------- */
-
-@media(max-width: 700px) {
-
-    nav {
-        padding: 0 20px;
-    }
-
-    .links {
-        display: none;
-    }
-
-    h1 {
-        letter-spacing: 5px;
-    }
-
-    .tagline {
-        font-size: 13px;
-        letter-spacing: 5px;
-    }
-
-    .description {
-        font-size: 15px;
-    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Animated Background -->
-
-<div class="background">
-
-    <div class="glow"></div>
-    <div class="glow"></div>
-
-    <div class="particle" style="left:5%; animation-delay:0s;"></div>
-    <div class="particle" style="left:15%; animation-delay:2s;"></div>
-    <div class="particle" style="left:25%; animation-delay:4s;"></div>
-    <div class="particle" style="left:35%; animation-delay:1s;"></div>
-    <div class="particle" style="left:45%; animation-delay:3s;"></div>
-    <div class="particle" style="left:55%; animation-delay:5s;"></div>
-    <div class="particle" style="left:65%; animation-delay:2s;"></div>
-    <div class="particle" style="left:75%; animation-delay:4s;"></div>
-    <div class="particle" style="left:85%; animation-delay:1s;"></div>
-    <div class="particle" style="left:95%; animation-delay:3s;"></div>
-
-</div>
-
-
-<!-- Navigation -->
-
 <nav>
+    <div class="logo">ARYAN</div>
 
-    <div class="logo">
-        AR<span>Y</span>AN
-    </div>
-
-    <div class="links">
+    <div>
         <a href="#">HOME</a>
-        <a href="#">ABOUT</a>
-        <a href="#">SKILLS</a>
-        <a href="#">PROJECTS</a>
-        <a href="#">CONTACT</a>
+        <a href="#uploadSection">ABOUT</a>
     </div>
-
 </nav>
 
+<section class="hero" id="home">
+    <div>
+        <h1>ARYAN</h1>
 
-<!-- Main Section -->
-
-<section class="hero">
-
-    <div class="content">
-
-        <div class="welcome">
-            WELCOME TO MY WORLD
-        </div>
-
-        <h1>
-            AR<span>Y</span>AN
-        </h1>
-
-        <div class="tagline">
-            DREAM • BUILD • INSPIRE
-        </div>
-
-        <p class="description">
-            I'm a passionate learner, creator and future entrepreneur.
-            I love exploring new ideas, building new things and
-            creating something different.
+        <p>
+            Welcome to my futuristic world.
         </p>
 
-        <button onclick="welcome()">
-            EXPLORE MORE →
+        <button class="explore-btn" onclick="openExplore()">
+            EXPLORE MORE
         </button>
+    </div>
+</section>
 
-        <div class="social">
-            <a href="#">◎</a>
-            <a href="#">◉</a>
-            <a href="#">▶</a>
-            <a href="#">✉</a>
-        </div>
+<!-- Explore More Section -->
+<section id="uploadSection">
+
+    <div class="upload-box">
+
+        <h2>EXPLORE MORE</h2>
+
+        <p>
+            Choose an image from your device.
+        </p>
+
+        <label for="imageInput" class="upload-label">
+            📷 Choose Image
+        </label>
+
+        <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
+        >
+
+        <img id="preview" alt="Selected Image">
+
+        <br>
+
+        <button class="back-btn" onclick="closeExplore()">
+            ← Back
+        </button>
 
     </div>
 
 </section>
 
-
 <script>
 
-function welcome() {
-    alert("Welcome to ARYAN's world ⚡");
+function openExplore() {
+    document.getElementById("uploadSection").style.display = "block";
+
+    document.getElementById("uploadSection")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 }
+
+function closeExplore() {
+    document.getElementById("uploadSection").style.display = "none";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+document.getElementById("imageInput").addEventListener("change", function(event) {
+
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    const preview = document.getElementById("preview");
+
+    preview.src = URL.createObjectURL(file);
+
+    preview.style.display = "block";
+});
 
 </script>
 
