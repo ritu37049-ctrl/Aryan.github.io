@@ -1,320 +1,446 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>VOID // CYBER PROFILES</title>
+<title>ARYAN // PROFILE</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:monospace;
 }
 
 body{
-    background:#050008;
-    color:#fff;
     min-height:100vh;
+    font-family:'Orbitron',sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%, #3b0a63 0%, transparent 30%),
+        radial-gradient(circle at 80% 80%, #16003b 0%, transparent 35%),
+        #030008;
+    color:#fff;
     overflow-x:hidden;
 }
 
-/* Cyber background */
-body:before{
+/* Background grid */
+body::before{
     content:"";
     position:fixed;
     inset:0;
-    background:
-      linear-gradient(rgba(140,0,255,.05) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(140,0,255,.05) 1px,transparent 1px);
-    background-size:35px 35px;
     pointer-events:none;
-    z-index:-2;
+    background-image:
+        linear-gradient(rgba(160,0,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(160,0,255,.08) 1px, transparent 1px);
+    background-size:45px 45px;
+    mask-image:linear-gradient(to bottom,black,transparent);
 }
 
-body:after{
-    content:"";
+/* Glow */
+.glow{
     position:fixed;
-    width:450px;
-    height:450px;
-    background:#8b00ff;
-    filter:blur(180px);
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:#9d00ff;
+    filter:blur(130px);
     opacity:.18;
-    top:10%;
-    left:50%;
-    transform:translateX(-50%);
-    z-index:-1;
+    pointer-events:none;
 }
 
-/* NAVBAR */
+.glow.one{
+    top:-100px;
+    left:-100px;
+}
 
-nav{
-    height:70px;
-    padding:0 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid #35104d;
-    background:rgba(5,0,8,.75);
-    backdrop-filter:blur(12px);
-    position:sticky;
-    top:0;
-    z-index:10;
+.glow.two{
+    right:-100px;
+    bottom:-100px;
+}
+
+/* HEADER */
+header{
+    text-align:center;
+    padding:70px 20px 30px;
 }
 
 .logo{
-    color:#b84cff;
-    font-size:22px;
-    font-weight:bold;
-    letter-spacing:3px;
-    text-shadow:0 0 15px #9d00ff;
+    font-size:clamp(42px,10vw,85px);
+    font-weight:900;
+    letter-spacing:10px;
+    color:#fff;
+    text-shadow:
+        0 0 10px #b000ff,
+        0 0 30px #8a00ff,
+        0 0 60px #6500ff;
 }
 
-nav button{
-    background:none;
-    border:1px solid #8b00ff;
-    color:#d69aff;
-    padding:9px 15px;
-    border-radius:6px;
-    cursor:pointer;
+.developed{
+    margin-top:12px;
+    font-size:12px;
+    letter-spacing:5px;
+    color:#b9a3ff;
 }
 
-/* HERO */
-
-.hero{
-    min-height:75vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+/* HOME */
+.home{
+    max-width:850px;
+    margin:auto;
+    padding:30px 20px 80px;
     text-align:center;
-    padding:30px 20px;
 }
 
-.status{
-    color:#a94dff;
+.welcome{
+    font-size:clamp(20px,5vw,38px);
+    margin-bottom:12px;
+}
+
+.subtitle{
+    color:#9d8aaa;
     font-size:13px;
     letter-spacing:3px;
-    margin-bottom:20px;
+    margin-bottom:45px;
 }
 
-.hero h1{
-    font-size:clamp(42px,11vw,90px);
-    letter-spacing:8px;
-    text-shadow:
-      0 0 10px #8b00ff,
-      0 0 35px #6f00ff;
-}
-
-.hero p{
-    color:#9d91a8;
-    margin:20px auto 30px;
-    max-width:550px;
-    line-height:1.7;
-}
-
-.main-btn{
-    border:1px solid #a100ff;
-    background:#120019;
-    color:#d98cff;
-    padding:14px 28px;
-    border-radius:5px;
-    cursor:pointer;
-    box-shadow:0 0 20px rgba(150,0,255,.3);
-    transition:.3s;
-}
-
-.main-btn:hover{
-    background:#8b00ff;
-    color:#fff;
-    box-shadow:0 0 35px #8b00ff;
-    transform:translateY(-3px);
-}
-
-/* SECTIONS */
-
-.section{
-    padding:60px 7%;
-}
-
-.title{
-    text-align:center;
-    margin-bottom:35px;
-}
-
-.title h2{
-    color:#c66aff;
-    font-size:28px;
-    text-shadow:0 0 15px #8b00ff;
-}
-
-.title p{
-    color:#756b7c;
-    margin-top:8px;
-}
-
-/* PROFILE CREATOR */
-
-.creator{
-    max-width:650px;
-    margin:auto;
-    padding:30px;
-    border:1px solid #40135c;
-    border-radius:12px;
-    background:rgba(20,0,30,.7);
-    box-shadow:0 0 35px rgba(130,0,255,.12);
-}
-
-.input{
-    width:100%;
-    padding:13px;
-    margin-bottom:15px;
-    background:#09000d;
-    border:1px solid #3d174e;
-    color:white;
-    border-radius:5px;
-    outline:none;
-}
-
-.input:focus{
-    border-color:#a100ff;
-    box-shadow:0 0 12px rgba(161,0,255,.3);
-}
-
-textarea.input{
-    height:100px;
-    resize:none;
-}
-
-.file{
-    display:none;
-}
-
-.file-label{
-    display:block;
-    padding:14px;
-    border:1px dashed #7930a0;
-    text-align:center;
-    color:#bb70df;
-    cursor:pointer;
-    margin-bottom:20px;
-    border-radius:5px;
-}
-
-.create{
-    width:100%;
-    padding:14px;
-    background:#7500a8;
-    border:0;
-    color:#fff;
-    cursor:pointer;
-    border-radius:5px;
-    font-weight:bold;
-    transition:.3s;
-}
-
-.create:hover{
-    background:#a100ff;
-    box-shadow:0 0 25px #8b00ff;
-}
-
-/* PROFILES */
-
-.profiles{
+/* BUTTONS */
+.buttons{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns:repeat(2,1fr);
     gap:20px;
 }
 
-.card{
-    padding:25px;
-    background:rgba(15,0,22,.8);
-    border:1px solid #35104d;
-    border-radius:10px;
+.main-btn{
+    position:relative;
+    padding:22px 15px;
+    border:1px solid #9d00ff;
+    border-radius:12px;
+    background:rgba(100,0,160,.12);
+    color:#fff;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:2px;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:
+        0 0 15px rgba(157,0,255,.25),
+        inset 0 0 15px rgba(157,0,255,.08);
+}
+
+.main-btn:hover{
+    transform:translateY(-5px);
+    background:rgba(157,0,255,.2);
+    box-shadow:
+        0 0 25px rgba(157,0,255,.6),
+        0 0 60px rgba(157,0,255,.2);
+}
+
+.main-btn span{
+    display:block;
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+/* PANELS */
+.panel{
+    display:none;
+    max-width:850px;
+    margin:20px auto 80px;
+    padding:20px;
+}
+
+.panel.active{
+    display:block;
+}
+
+.panel-title{
     text-align:center;
+    font-size:25px;
+    margin-bottom:30px;
+    text-shadow:0 0 20px #9d00ff;
+}
+
+/* FORM */
+.form-box{
+    background:rgba(10,0,20,.75);
+    border:1px solid rgba(157,0,255,.45);
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 0 40px rgba(100,0,180,.15);
+}
+
+.field{
+    margin-bottom:18px;
+}
+
+.field label{
+    display:block;
+    color:#b99bff;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:8px;
+}
+
+.field input,
+.field textarea,
+.field select{
+    width:100%;
+    padding:14px;
+    border-radius:8px;
+    border:1px solid #402052;
+    outline:none;
+    background:#08020f;
+    color:#fff;
+    font-family:inherit;
+    font-size:12px;
+}
+
+.field textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+    border-color:#a600ff;
+    box-shadow:0 0 15px rgba(166,0,255,.25);
+}
+
+.save-btn{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:9px;
+    background:linear-gradient(90deg,#7200ff,#b000ff);
+    color:white;
+    font-family:inherit;
+    font-weight:800;
+    letter-spacing:2px;
+    cursor:pointer;
     transition:.3s;
 }
 
-.card:hover{
-    transform:translateY(-6px);
-    border-color:#9b00ff;
-    box-shadow:0 0 25px rgba(155,0,255,.25);
+.save-btn:hover{
+    box-shadow:0 0 30px rgba(174,0,255,.6);
+    transform:translateY(-2px);
 }
 
-.avatar{
-    width:90px;
-    height:90px;
+/* IMAGE UPLOAD */
+.image-preview{
+    width:120px;
+    height:120px;
     border-radius:50%;
+    margin:0 auto 20px;
+    border:2px solid #a000ff;
+    box-shadow:0 0 30px rgba(160,0,255,.5);
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#0b0314;
+    color:#7c688b;
+    font-size:11px;
+    text-align:center;
+}
+
+.image-preview img{
+    width:100%;
+    height:100%;
     object-fit:cover;
-    border:2px solid #9b00ff;
-    box-shadow:0 0 20px #7200a8;
-    margin-bottom:15px;
 }
 
-.card h3{
-    color:#d79aff;
+/* PROFILE CARD */
+.profile-card{
+    position:relative;
+    max-width:550px;
+    margin:auto;
+    padding:35px 25px;
+    border:1px solid #8c00ff;
+    border-radius:22px;
+    background:
+        linear-gradient(145deg,rgba(50,0,80,.8),rgba(5,0,12,.95));
+    box-shadow:
+        0 0 30px rgba(140,0,255,.3),
+        inset 0 0 30px rgba(120,0,255,.05);
+    overflow:hidden;
 }
 
-.username{
-    color:#7e6d89;
-    font-size:13px;
-    margin:5px 0 15px;
+.profile-card::before{
+    content:"VOID // PROFILE";
+    position:absolute;
+    top:15px;
+    right:18px;
+    font-size:7px;
+    color:#744a8d;
+    letter-spacing:2px;
 }
 
-.bio{
-    color:#aaa;
-    font-size:14px;
-    line-height:1.6;
+.profile-card::after{
+    content:"";
+    position:absolute;
+    width:200px;
+    height:200px;
+    background:#8c00ff;
+    filter:blur(100px);
+    opacity:.15;
+    top:-100px;
+    left:-100px;
 }
 
-.skills{
-    margin-top:15px;
+.profile-image{
+    width:145px;
+    height:145px;
+    border-radius:50%;
+    border:2px solid #a600ff;
+    margin:auto;
+    overflow:hidden;
+    background:#09000f;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#72527d;
+    box-shadow:
+        0 0 20px #8c00ff,
+        0 0 60px rgba(140,0,255,.4);
 }
 
-.skill{
-    display:inline-block;
-    border:1px solid #512064;
-    color:#bb70df;
-    padding:5px 8px;
-    margin:3px;
-    border-radius:4px;
+.profile-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.profile-name{
+    text-align:center;
+    margin-top:22px;
+    font-size:27px;
+    font-weight:800;
+}
+
+.profile-username{
+    text-align:center;
+    color:#a86dff;
+    margin-top:7px;
     font-size:11px;
 }
 
-/* FOOTER */
+.rank{
+    width:max-content;
+    margin:15px auto;
+    padding:7px 15px;
+    border:1px solid #a000ff;
+    border-radius:30px;
+    font-size:9px;
+    letter-spacing:2px;
+    color:#d5b6ff;
+}
 
+.profile-bio{
+    text-align:center;
+    color:#b4a5bd;
+    line-height:1.8;
+    font-size:11px;
+    margin:20px 0;
+}
+
+.skills{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:20px;
+}
+
+.skill{
+    padding:8px 12px;
+    border-radius:20px;
+    background:rgba(140,0,255,.1);
+    border:1px solid #442052;
+    font-size:9px;
+    color:#cdaeff;
+}
+
+.socials{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
+
+.social{
+    text-decoration:none;
+    color:white;
+    border:1px solid #54206e;
+    padding:10px 15px;
+    border-radius:8px;
+    font-size:9px;
+    transition:.3s;
+}
+
+.social:hover{
+    border-color:#b000ff;
+    box-shadow:0 0 15px rgba(176,0,255,.4);
+}
+
+/* EDIT BUTTON */
+.edit-btn{
+    margin-top:25px;
+    width:100%;
+    padding:13px;
+    background:transparent;
+    border:1px solid #702099;
+    color:#c99aff;
+    border-radius:8px;
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.edit-btn:hover{
+    background:rgba(130,0,255,.12);
+}
+
+/* EMPTY PROFILE */
+.empty{
+    text-align:center;
+    padding:50px 20px;
+    color:#8e7798;
+    font-size:12px;
+    line-height:2;
+}
+
+/* FOOTER */
 footer{
     text-align:center;
     padding:30px;
-    color:#55485c;
-    border-top:1px solid #24102f;
-    margin-top:40px;
+    color:#493c50;
+    font-size:9px;
+    letter-spacing:3px;
 }
 
 /* MOBILE */
-
 @media(max-width:600px){
-
-    nav{
-        padding:0 20px;
+    .buttons{
+        grid-template-columns:1fr;
     }
 
-    nav button{
-        font-size:11px;
+    header{
+        padding-top:45px;
     }
 
-    .hero h1{
-        letter-spacing:4px;
+    .logo{
+        letter-spacing:5px;
     }
 
-    .section{
-        padding:45px 20px;
+    .form-box{
+        padding:18px;
     }
 
-    .creator{
-        padding:20px;
+    .profile-card{
+        padding:30px 18px;
     }
 }
 </style>
@@ -322,28 +448,35 @@ footer{
 
 <body>
 
-<nav>
-    <div class="logo">VOID//NET</div>
-    <button onclick="scrollToCreator()">CREATE PROFILE</button>
-</nav>
+<div class="glow one"></div>
+<div class="glow two"></div>
 
-<section class="hero">
+<header>
+    <div class="logo">ARYAN</div>
+    <div class="developed">DEVELOPED BY ARYAN</div>
+</header>
 
-    <div>
+<!-- HOME -->
+<section class="home" id="home">
 
-        <div class="status">
-            ● SYSTEM ONLINE
-        </div>
+    <div class="welcome">
+        WELCOME TO MY WORLD
+    </div>
 
-        <h1>ENTER THE VOID</h1>
+    <div class="subtitle">
+        CREATE • CUSTOMIZE • EXPRESS
+    </div>
 
-        <p>
-            Create your own cyber identity.
-            Build a profile and enter the network.
-        </p>
+    <div class="buttons">
 
-        <button class="main-btn" onclick="scrollToCreator()">
-            [ CREATE YOUR PROFILE ]
+        <button class="main-btn" onclick="showCreate()">
+            <span>✦</span>
+            CREATE YOUR OWN PROFILE
+        </button>
+
+        <button class="main-btn" onclick="showProfile()">
+            <span>◈</span>
+            MY PROFILE
         </button>
 
     </div>
@@ -351,51 +484,68 @@ footer{
 </section>
 
 
-<section class="section" id="creator">
+<!-- CREATE PROFILE -->
+<section class="panel" id="createPanel">
 
-    <div class="title">
-        <h2>// CREATE IDENTITY</h2>
-        <p>Build your personal profile</p>
-    </div>
+    <h2 class="panel-title">CREATE YOUR PROFILE</h2>
 
-    <div class="creator">
+    <div class="form-box">
 
-        <input
-            class="input"
-            id="name"
-            placeholder="ENTER NAME"
-        >
+        <div class="image-preview" id="imagePreview">
+            PROFILE<br>PHOTO
+        </div>
 
-        <input
-            class="input"
-            id="username"
-            placeholder="ENTER USERNAME"
-        >
+        <div class="field">
+            <label>PROFILE PHOTO</label>
+            <input type="file" id="photo" accept="image/*">
+        </div>
 
-        <textarea
-            class="input"
-            id="bio"
-            placeholder="WRITE YOUR BIO..."
-        ></textarea>
+        <div class="field">
+            <label>YOUR NAME</label>
+            <input type="text" id="name" placeholder="Enter your name">
+        </div>
 
-        <input
-            class="input"
-            id="skills"
-            placeholder="SKILLS (example: HTML, Gaming, Editing)"
-        >
+        <div class="field">
+            <label>USERNAME</label>
+            <input type="text" id="username" placeholder="@username">
+        </div>
 
-        <label class="file-label" for="photo">
-            📁 SELECT PROFILE IMAGE
-        </label>
+        <div class="field">
+            <label>BIO</label>
+            <textarea id="bio" placeholder="Tell something about yourself..."></textarea>
+        </div>
 
-        <input
-            class="file"
-            type="file"
-            id="photo"
-            accept="image/*"
-        >
+        <div class="field">
+            <label>SKILLS</label>
+            <input type="text" id="skills" placeholder="Gaming, Editing, Coding...">
+        </div>
 
-        <button class="create" onclick="createProfile()">
+        <div class="field">
+            <label>PROFILE STYLE</label>
+            <select id="style">
+                <option value="purple">PURPLE VOID</option>
+                <option value="blue">CYBER BLUE</option>
+                <option value="pink">NEON PINK</option>
+                <option value="red">DARK RED</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>INSTAGRAM</label>
+            <input type="text" id="instagram" placeholder="https://instagram.com/">
+        </div>
+
+        <div class="field">
+            <label>YOUTUBE</label>
+            <input type="text" id="youtube" placeholder="https://youtube.com/">
+        </div>
+
+        <div class="field">
+            <label>DISCORD</label>
+            <input type="text" id="discord" placeholder="Your Discord username">
+        </div>
+
+        <button class="save-btn" onclick="saveProfile()">
             CREATE PROFILE
         </button>
 
@@ -404,46 +554,95 @@ footer{
 </section>
 
 
-<section class="section">
+<!-- MY PROFILE -->
+<section class="panel" id="profilePanel">
 
-    <div class="title">
-        <h2>// NETWORK PROFILES</h2>
-        <p>Profiles created on this device</p>
-    </div>
+    <h2 class="panel-title">MY PROFILE</h2>
 
-    <div class="profiles" id="profiles">
-
-    </div>
+    <div id="profileContainer"></div>
 
 </section>
 
 
 <footer>
-    VOID//NET — CYBER PROFILE NETWORK
+    VOID//NET — DEVELOPED BY ARYAN
 </footer>
 
 
 <script>
 
-function scrollToCreator(){
+/* =========================================
+   PROFILE DATA
+========================================= */
 
-    document.getElementById("creator")
-    .scrollIntoView({
+let selectedImage = "";
+
+
+/* =========================================
+   IMAGE PREVIEW
+========================================= */
+
+document.getElementById("photo").addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        selectedImage = e.target.result;
+
+        document.getElementById("imagePreview").innerHTML =
+            `<img src="${selectedImage}" alt="Profile">`;
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+
+/* =========================================
+   SHOW CREATE
+========================================= */
+
+function showCreate(){
+
+    document.getElementById("createPanel").classList.add("active");
+    document.getElementById("profilePanel").classList.remove("active");
+
+    document.getElementById("createPanel").scrollIntoView({
         behavior:"smooth"
     });
 
+    loadExistingData();
 }
 
 
-/* Load saved profiles */
+/* =========================================
+   SHOW PROFILE
+========================================= */
 
-let savedProfiles =
-    JSON.parse(localStorage.getItem("profiles")) || [];
+function showProfile(){
 
-displayProfiles();
+    document.getElementById("profilePanel").classList.add("active");
+    document.getElementById("createPanel").classList.remove("active");
+
+    document.getElementById("profilePanel").scrollIntoView({
+        behavior:"smooth"
+    });
+
+    displayProfile();
+}
 
 
-function createProfile(){
+/* =========================================
+   SAVE PROFILE
+========================================= */
+
+function saveProfile(){
 
     const name =
         document.getElementById("name").value.trim();
@@ -455,167 +654,301 @@ function createProfile(){
         document.getElementById("bio").value.trim();
 
     const skills =
-        document.getElementById("skills").value.trim();
+        document.getElementById("skills").value
+        .split(",")
+        .map(x => x.trim())
+        .filter(x => x !== "");
 
-    const file =
-        document.getElementById("photo").files[0];
+    const style =
+        document.getElementById("style").value;
+
+    const instagram =
+        document.getElementById("instagram").value.trim();
+
+    const youtube =
+        document.getElementById("youtube").value.trim();
+
+    const discord =
+        document.getElementById("discord").value.trim();
 
 
     if(!name || !username){
 
-        alert("NAME aur USERNAME zaroor bharo.");
+        alert("Please enter your name and username.");
 
         return;
     }
 
 
-    if(file){
+    const profile = {
 
-        const reader = new FileReader();
+        name:name,
 
-        reader.onload = function(e){
+        username:username.startsWith("@")
+            ? username
+            : "@" + username,
 
-            saveProfile(
-                name,
-                username,
-                bio,
-                skills,
-                e.target.result
-            );
+        bio:bio,
 
-        };
+        skills:skills,
 
-        reader.readAsDataURL(file);
+        style:style,
 
-    }else{
+        instagram:instagram,
 
-        saveProfile(
-            name,
-            username,
-            bio,
-            skills,
-            ""
-        );
+        youtube:youtube,
+
+        discord:discord,
+
+        image:selectedImage
+
+    };
+
+
+    localStorage.setItem(
+        "aryanProfile",
+        JSON.stringify(profile)
+    );
+
+
+    alert("PROFILE CREATED SUCCESSFULLY ⚡");
+
+    displayProfile();
+
+}
+
+
+/* =========================================
+   LOAD EXISTING DATA
+========================================= */
+
+function loadExistingData(){
+
+    const saved =
+        localStorage.getItem("aryanProfile");
+
+    if(!saved) return;
+
+    const profile = JSON.parse(saved);
+
+    document.getElementById("name").value =
+        profile.name || "";
+
+    document.getElementById("username").value =
+        profile.username || "";
+
+    document.getElementById("bio").value =
+        profile.bio || "";
+
+    document.getElementById("skills").value =
+        (profile.skills || []).join(", ");
+
+    document.getElementById("style").value =
+        profile.style || "purple";
+
+    document.getElementById("instagram").value =
+        profile.instagram || "";
+
+    document.getElementById("youtube").value =
+        profile.youtube || "";
+
+    document.getElementById("discord").value =
+        profile.discord || "";
+
+
+    if(profile.image){
+
+        selectedImage = profile.image;
+
+        document.getElementById("imagePreview").innerHTML =
+            `<img src="${profile.image}" alt="Profile">`;
 
     }
 
 }
 
 
-function saveProfile(
-    name,
-    username,
-    bio,
-    skills,
-    image
-){
+/* =========================================
+   DISPLAY PROFILE
+========================================= */
 
-    const profile = {
+function displayProfile(){
 
-        name:name,
-
-        username:username,
-
-        bio:bio,
-
-        skills:skills,
-
-        image:image
-
-    };
-
-
-    savedProfiles.push(profile);
-
-    localStorage.setItem(
-        "profiles",
-        JSON.stringify(savedProfiles)
-    );
-
-
-    document.getElementById("name").value="";
-    document.getElementById("username").value="";
-    document.getElementById("bio").value="";
-    document.getElementById("skills").value="";
-    document.getElementById("photo").value="";
-
-
-    displayProfiles();
-
-    alert("PROFILE CREATED ✓");
-
-}
-
-
-function displayProfiles(){
+    const saved =
+        localStorage.getItem("aryanProfile");
 
     const container =
-        document.getElementById("profiles");
-
-    container.innerHTML="";
+        document.getElementById("profileContainer");
 
 
-    savedProfiles.forEach(function(profile){
+    if(!saved){
 
-        const card =
-            document.createElement("div");
+        container.innerHTML = `
+            <div class="form-box empty">
+                NO PROFILE FOUND<br><br>
+                CREATE YOUR PROFILE FIRST.
+                <br><br>
+                <button class="save-btn"
+                        onclick="showCreate()">
+                    CREATE PROFILE
+                </button>
+            </div>
+        `;
 
-        card.className="card";
-
-
-        const avatar =
-            profile.image ||
-            "https://via.placeholder.com/90/150020/ffffff?text=USER";
-
-
-        let skillHTML="";
-
-
-        if(profile.skills){
-
-            profile.skills
-            .split(",")
-            .forEach(function(skill){
-
-                skillHTML +=
-                    `<span class="skill">
-                    ${skill.trim()}
-                    </span>`;
-
-            });
-
-        }
+        return;
+    }
 
 
-        card.innerHTML = `
+    const profile = JSON.parse(saved);
 
-            <img
-                class="avatar"
-                src="${avatar}"
-            >
 
-            <h3>${profile.name}</h3>
+    let skillsHTML = "";
 
-            <div class="username">
-                @${profile.username}
+    if(profile.skills && profile.skills.length){
+
+        skillsHTML = profile.skills
+            .map(skill =>
+                `<div class="skill">${escapeHTML(skill)}</div>`
+            )
+            .join("");
+
+    }
+
+
+    let socialsHTML = "";
+
+
+    if(profile.instagram){
+
+        socialsHTML += `
+            <a class="social"
+               href="${safeURL(profile.instagram)}"
+               target="_blank">
+               INSTAGRAM
+            </a>
+        `;
+
+    }
+
+
+    if(profile.youtube){
+
+        socialsHTML += `
+            <a class="social"
+               href="${safeURL(profile.youtube)}"
+               target="_blank">
+               YOUTUBE
+            </a>
+        `;
+
+    }
+
+
+    if(profile.discord){
+
+        socialsHTML += `
+            <div class="social">
+                DISCORD: ${escapeHTML(profile.discord)}
+            </div>
+        `;
+
+    }
+
+
+    const imageHTML = profile.image
+
+        ? `<img src="${profile.image}" alt="Profile Photo">`
+
+        : `<span>NO PHOTO</span>`;
+
+
+    container.innerHTML = `
+
+        <div class="profile-card">
+
+            <div class="profile-image">
+                ${imageHTML}
             </div>
 
-            <div class="bio">
-                ${profile.bio || "No bio available."}
+            <div class="profile-name">
+                ${escapeHTML(profile.name)}
+            </div>
+
+            <div class="profile-username">
+                ${escapeHTML(profile.username)}
+            </div>
+
+            <div class="rank">
+                USER
+            </div>
+
+            <div class="profile-bio">
+                ${escapeHTML(profile.bio || "No bio added yet.")}
             </div>
 
             <div class="skills">
-                ${skillHTML}
+                ${skillsHTML}
             </div>
 
-        `;
+            <div class="socials">
+                ${socialsHTML}
+            </div>
 
+            <button class="edit-btn"
+                    onclick="showCreate()">
+                EDIT PROFILE
+            </button>
 
-        container.appendChild(card);
+        </div>
 
-    });
+    `;
 
 }
+
+
+/* =========================================
+   SECURITY HELPERS
+========================================= */
+
+function escapeHTML(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function safeURL(url){
+
+    if(!/^https?:\/\//i.test(url)){
+        return "#";
+    }
+
+    return url.replace(/"/g,"%22");
+
+}
+
+
+/* =========================================
+   AUTO LOAD
+========================================= */
+
+window.addEventListener("load", function(){
+
+    const saved =
+        localStorage.getItem("aryanProfile");
+
+    if(saved){
+
+        displayProfile();
+
+    }
+
+});
 
 </script>
 
