@@ -1,2 +1,1725 @@
 const SUPABASE_URL = "https://pqwcbzcqizvhpmgssgjb.supabase.co";
 const SUPABASE_KEY = "sb_publishable";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOID-NET</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  background:#050008;
+  color:#fff;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(130,0,255,.18),transparent 35%),
+    radial-gradient(circle at 80% 70%,rgba(255,0,170,.12),transparent 35%);
+  pointer-events:none;
+  z-index:-1;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* LANDING */
+
+#landing{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.hero{
+  width:100%;
+  max-width:700px;
+  text-align:center;
+  padding:50px 25px;
+  border:1px solid #8b00ff;
+  border-radius:25px;
+  background:rgba(10,0,20,.75);
+  box-shadow:0 0 40px rgba(140,0,255,.25);
+}
+
+.logo{
+  font-size:55px;
+  font-weight:900;
+  letter-spacing:8px;
+  color:#c36aff;
+  text-shadow:0 0 20px #9d00ff;
+}
+
+.hero p{
+  margin:18px 0 30px;
+  color:#bbb;
+}
+
+.primary{
+  border:0;
+  padding:14px 25px;
+  border-radius:12px;
+  background:linear-gradient(90deg,#7600ff,#d000ff);
+  color:white;
+  font-weight:bold;
+  box-shadow:0 0 20px rgba(180,0,255,.35);
+}
+
+/* AUTH */
+
+#authPage{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.authBox{
+  width:100%;
+  max-width:420px;
+  padding:30px;
+  background:#0b0012;
+  border:1px solid #7200ff;
+  border-radius:20px;
+  box-shadow:0 0 35px rgba(120,0,255,.25);
+}
+
+.authBox h2{
+  text-align:center;
+  margin-bottom:25px;
+  color:#c56cff;
+}
+
+input,textarea{
+  width:100%;
+  background:#11001c;
+  color:white;
+  border:1px solid #3b1754;
+  border-radius:10px;
+  padding:13px;
+  margin:7px 0;
+  outline:none;
+}
+
+input:focus,textarea:focus{
+  border-color:#a500ff;
+  box-shadow:0 0 10px rgba(165,0,255,.25);
+}
+
+.authBox button{
+  width:100%;
+  margin-top:10px;
+}
+
+.switch{
+  text-align:center;
+  margin-top:18px;
+  color:#aaa;
+}
+
+.switch span{
+  color:#c96cff;
+  cursor:pointer;
+}
+
+/* APP */
+
+#app{
+  min-height:100vh;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:10;
+  height:65px;
+  background:rgba(5,0,8,.9);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid #291033;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+}
+
+.smallLogo{
+  color:#c56cff;
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:3px;
+}
+
+.navBtns{
+  display:flex;
+  gap:8px;
+}
+
+.navBtns button{
+  background:#12001d;
+  border:1px solid #35134d;
+  color:#ddd;
+  padding:8px 11px;
+  border-radius:9px;
+}
+
+.navBtns button:hover{
+  border-color:#a400ff;
+}
+
+.main{
+  width:100%;
+  max-width:1000px;
+  margin:auto;
+  padding:25px 15px 80px;
+}
+
+/* PROFILE */
+
+.profileCard{
+  background:rgba(12,0,20,.8);
+  border:1px solid #361347;
+  border-radius:20px;
+  padding:25px;
+  margin-bottom:25px;
+}
+
+.profileTop{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.avatar{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #b000ff;
+  box-shadow:0 0 20px rgba(176,0,255,.3);
+  background:#170021;
+}
+
+.profileInfo h2{
+  margin-bottom:5px;
+}
+
+.username{
+  color:#a978bb;
+}
+
+.rank{
+  display:inline-block;
+  margin-top:8px;
+  padding:4px 9px;
+  border-radius:8px;
+  background:#260038;
+  color:#d88aff;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.bio{
+  color:#bbb;
+  margin-top:15px;
+  line-height:1.5;
+}
+
+.profileActions{
+  margin-top:18px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.profileActions button{
+  background:#180022;
+  color:#fff;
+  border:1px solid #4b1a64;
+  padding:9px 14px;
+  border-radius:9px;
+}
+
+/* CREATE POST */
+
+.createPost{
+  background:rgba(12,0,20,.8);
+  border:1px solid #361347;
+  padding:20px;
+  border-radius:20px;
+  margin-bottom:25px;
+}
+
+.createPost h3{
+  color:#c56cff;
+  margin-bottom:10px;
+}
+
+.fileInput{
+  padding:10px;
+}
+
+.preview{
+  max-width:100%;
+  max-height:300px;
+  border-radius:12px;
+  margin-top:10px;
+  display:none;
+}
+
+/* SEARCH */
+
+.searchBox{
+  margin-bottom:20px;
+}
+
+/* POST */
+
+.post{
+  background:#0b0012;
+  border:1px solid #30103f;
+  border-radius:20px;
+  margin-bottom:25px;
+  overflow:hidden;
+}
+
+.postHeader{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:15px;
+}
+
+.postHeader .avatar{
+  width:42px;
+  height:42px;
+}
+
+.postUser{
+  font-weight:bold;
+}
+
+.postRank{
+  font-size:11px;
+  color:#a86bc0;
+}
+
+.postImage{
+  width:100%;
+  max-height:650px;
+  object-fit:cover;
+  display:block;
+}
+
+.postBody{
+  padding:15px;
+}
+
+.postActions{
+  display:flex;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.actionBtn{
+  background:#16001f;
+  border:1px solid #371247;
+  color:#ddd;
+  padding:8px 12px;
+  border-radius:9px;
+}
+
+.actionBtn.liked{
+  color:#ff55d9;
+  border-color:#ff55d9;
+}
+
+.caption{
+  margin-bottom:12px;
+  line-height:1.5;
+}
+
+.caption strong{
+  color:#d277ff;
+}
+
+.comments{
+  border-top:1px solid #28102f;
+  margin-top:10px;
+  padding-top:10px;
+}
+
+.comment{
+  margin:7px 0;
+  color:#ccc;
+  font-size:14px;
+}
+
+.comment strong{
+  color:#c66cff;
+}
+
+.commentBox{
+  display:flex;
+  gap:7px;
+  margin-top:10px;
+}
+
+.commentBox input{
+  margin:0;
+}
+
+.commentBox button{
+  background:#6500a8;
+  border:0;
+  color:white;
+  padding:0 14px;
+  border-radius:9px;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  z-index:50;
+}
+
+.modalBox{
+  width:100%;
+  max-width:450px;
+  background:#0d0015;
+  border:1px solid #8500ff;
+  border-radius:20px;
+  padding:25px;
+}
+
+.modalBox h2{
+  color:#c86cff;
+  margin-bottom:15px;
+}
+
+.modalBtns{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+
+.modalBtns button{
+  flex:1;
+  padding:11px;
+  border-radius:9px;
+  border:1px solid #48145f;
+  background:#170021;
+  color:#fff;
+}
+
+.loading{
+  text-align:center;
+  padding:30px;
+  color:#aaa;
+}
+
+.empty{
+  text-align:center;
+  padding:40px;
+  color:#777;
+}
+
+@media(max-width:600px){
+  .logo{
+    font-size:40px;
+  }
+
+  .topbar{
+    padding:0 10px;
+  }
+
+  .navBtns button{
+    padding:7px;
+    font-size:12px;
+  }
+
+  .profileTop{
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANDING -->
+
+<section id="landing">
+  <div class="hero">
+    <div class="logo">VOID-NET</div>
+    <p>CREATE • CONNECT • SHARE</p>
+    <p>Developed by ARYAN</p>
+    <button class="primary" onclick="showAuth('signup')">
+      CREATE YOUR OWN PROFILE
+    </button>
+    <br><br>
+    <button class="primary" onclick="showAuth('login')">
+      LOGIN
+    </button>
+  </div>
+</section>
+
+
+<!-- AUTH -->
+
+<section id="authPage" class="hidden">
+  <div class="authBox">
+
+    <h2 id="authTitle">CREATE PROFILE</h2>
+
+    <div id="signupFields">
+      <input id="displayName" placeholder="Your Name">
+      <input id="username" placeholder="Username">
+    </div>
+
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+
+    <button class="primary" onclick="submitAuth()" id="authButton">
+      CREATE ACCOUNT
+    </button>
+
+    <div class="switch">
+      <span onclick="toggleAuth()" id="switchText">
+        Already have an account? Login
+      </span>
+    </div>
+
+    <div class="switch">
+      <span onclick="backHome()">← Back</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- APP -->
+
+<section id="app" class="hidden">
+
+  <header class="topbar">
+
+    <div class="smallLogo">VOID-NET</div>
+
+    <div class="navBtns">
+      <button onclick="loadFeed()">HOME</button>
+      <button onclick="openMyProfile()">PROFILE</button>
+      <button onclick="logout()">LOGOUT</button>
+    </div>
+
+  </header>
+
+  <main class="main">
+
+    <!-- SEARCH -->
+
+    <input
+      class="searchBox"
+      id="searchInput"
+      placeholder="🔎 Search username..."
+      oninput="searchUsers()"
+    >
+
+    <div id="searchResults"></div>
+
+    <!-- PROFILE -->
+
+    <div id="profileSection"></div>
+
+    <!-- CREATE POST -->
+
+    <div class="createPost">
+
+      <h3>＋ CREATE POST</h3>
+
+      <input
+        id="postImage"
+        class="fileInput"
+        type="file"
+        accept="image/*"
+        onchange="previewImage(event)"
+      >
+
+      <img id="imagePreview" class="preview">
+
+      <textarea
+        id="postCaption"
+        placeholder="Write something..."
+      ></textarea>
+
+      <button class="primary" onclick="createPost()">
+        POST
+      </button>
+
+    </div>
+
+    <!-- FEED -->
+
+    <div id="feed">
+      <div class="loading">Loading VOID-NET...</div>
+    </div>
+
+  </main>
+
+</section>
+
+
+<!-- EDIT PROFILE MODAL -->
+
+<div id="editModal" class="modal hidden">
+
+  <div class="modalBox">
+
+    <h2>EDIT PROFILE</h2>
+
+    <input id="editName" placeholder="Display name">
+
+    <textarea id="editBio" placeholder="Bio"></textarea>
+
+    <input
+      id="avatarFile"
+      type="file"
+      accept="image/*"
+    >
+
+    <div class="modalBtns">
+      <button onclick="saveProfile()">SAVE</button>
+      <button onclick="closeEdit()">CANCEL</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE CONNECTION
+===================================================== */
+
+const SUPABASE_URL =
+"https://pqwcbzcqizvhpmgssgjb.supabase.co";
+
+/*
+  IMPORTANT:
+  Replace YOUR_PUBLISHABLE_KEY with your complete
+  Supabase Publishable Key.
+*/
+
+const SUPABASE_KEY =
+"YOUR_PUBLISHABLE_KEY";
+
+const { createClient } = supabase;
+
+const db = createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* =====================================================
+   GLOBAL VARIABLES
+===================================================== */
+
+let currentUser = null;
+let currentProfile = null;
+let loginMode = false;
+
+
+/* =====================================================
+   AUTH SCREEN
+===================================================== */
+
+function showAuth(mode){
+
+  document.getElementById("landing")
+    .classList.add("hidden");
+
+  document.getElementById("authPage")
+    .classList.remove("hidden");
+
+  loginMode = mode === "login";
+
+  updateAuthUI();
+}
+
+
+function updateAuthUI(){
+
+  const title =
+    document.getElementById("authTitle");
+
+  const button =
+    document.getElementById("authButton");
+
+  const fields =
+    document.getElementById("signupFields");
+
+  const switchText =
+    document.getElementById("switchText");
+
+  if(loginMode){
+
+    title.innerText = "LOGIN";
+
+    button.innerText = "LOGIN";
+
+    fields.classList.add("hidden");
+
+    switchText.innerText =
+      "Don't have an account? Create one";
+
+  }else{
+
+    title.innerText = "CREATE PROFILE";
+
+    button.innerText = "CREATE ACCOUNT";
+
+    fields.classList.remove("hidden");
+
+    switchText.innerText =
+      "Already have an account? Login";
+  }
+}
+
+
+function toggleAuth(){
+
+  loginMode = !loginMode;
+
+  updateAuthUI();
+}
+
+
+function backHome(){
+
+  document.getElementById("authPage")
+    .classList.add("hidden");
+
+  document.getElementById("landing")
+    .classList.remove("hidden");
+}
+
+
+/* =====================================================
+   SIGNUP / LOGIN
+===================================================== */
+
+async function submitAuth(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  if(!email || !password){
+
+    alert("Email aur password fill karo.");
+    return;
+  }
+
+  if(loginMode){
+
+    const { data, error } =
+      await db.auth.signInWithPassword({
+        email,
+        password
+      });
+
+    if(error){
+
+      alert(error.message);
+      return;
+    }
+
+    currentUser = data.user;
+
+    await startApp();
+
+  }else{
+
+    const displayName =
+      document.getElementById("displayName")
+      .value.trim();
+
+    const username =
+      document.getElementById("username")
+      .value.trim()
+      .toLowerCase()
+      .replace(/\s+/g,"");
+
+    if(!displayName || !username){
+
+      alert("Name aur username fill karo.");
+      return;
+    }
+
+    const { data, error } =
+      await db.auth.signUp({
+        email,
+        password
+      });
+
+    if(error){
+
+      alert(error.message);
+      return;
+    }
+
+    if(!data.user){
+
+      alert("Account create nahi hua.");
+      return;
+    }
+
+    currentUser = data.user;
+
+    const { error: profileError } =
+      await db.from("profiles").insert({
+
+        id:data.user.id,
+
+        username:username,
+
+        display_name:displayName,
+
+        bio:"",
+
+        avatar_url:"",
+
+        rank:"USER"
+      });
+
+    if(profileError){
+
+      alert(profileError.message);
+      return;
+    }
+
+    if(!data.session){
+
+      alert(
+        "Account create ho gaya! Email verify karke phir Login karo."
+      );
+
+      showAuth("login");
+      return;
+    }
+
+    await startApp();
+  }
+}
+
+
+/* =====================================================
+   START APP
+===================================================== */
+
+async function startApp(){
+
+  document.getElementById("landing")
+    .classList.add("hidden");
+
+  document.getElementById("authPage")
+    .classList.add("hidden");
+
+  document.getElementById("app")
+    .classList.remove("hidden");
+
+  await loadMyProfile();
+
+  await loadFeed();
+}
+
+
+/* =====================================================
+   LOAD CURRENT PROFILE
+===================================================== */
+
+async function loadMyProfile(){
+
+  if(!currentUser) return;
+
+  const { data, error } =
+    await db
+      .from("profiles")
+      .select("*")
+      .eq("id",currentUser.id)
+      .single();
+
+  if(error){
+
+    console.error(error);
+    return;
+  }
+
+  currentProfile = data;
+
+  showProfile(data);
+}
+
+
+/* =====================================================
+   SHOW PROFILE
+===================================================== */
+
+function showProfile(profile){
+
+  if(!profile) return;
+
+  const avatar =
+    profile.avatar_url ||
+    "https://ui-avatars.com/api/?name=" +
+    encodeURIComponent(profile.display_name);
+
+  document.getElementById("profileSection").innerHTML = `
+
+    <div class="profileCard">
+
+      <div class="profileTop">
+
+        <img
+          class="avatar"
+          src="${escapeHTML(avatar)}"
+        >
+
+        <div class="profileInfo">
+
+          <h2>${escapeHTML(profile.display_name)}</h2>
+
+          <div class="username">
+            @${escapeHTML(profile.username)}
+          </div>
+
+          <span class="rank">
+            ${escapeHTML(profile.rank)}
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="bio">
+        ${escapeHTML(profile.bio || "No bio yet.")}
+      </div>
+
+      <div class="profileActions">
+
+        <button onclick="openEdit()">
+          ✏️ Edit Profile
+        </button>
+
+        <button onclick="loadFeed()">
+          🔄 Refresh
+        </button>
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+/* =====================================================
+   FEED
+===================================================== */
+
+async function loadFeed(){
+
+  const feed =
+    document.getElementById("feed");
+
+  feed.innerHTML =
+    `<div class="loading">Loading posts...</div>`;
+
+  const { data, error } =
+    await db
+      .from("posts")
+      .select(`
+        id,
+        user_id,
+        image_url,
+        caption,
+        created_at,
+        profiles (
+          username,
+          display_name,
+          avatar_url,
+          rank
+        )
+      `)
+      .order("created_at",{ascending:false});
+
+  if(error){
+
+    console.error(error);
+
+    feed.innerHTML =
+      `<div class="empty">Posts load nahi ho rahe.<br>${escapeHTML(error.message)}</div>`;
+
+    return;
+  }
+
+  if(!data || data.length === 0){
+
+    feed.innerHTML =
+      `<div class="empty">Abhi koi post nahi hai.<br>First post tum karo 🔥</div>`;
+
+    return;
+  }
+
+  feed.innerHTML = "";
+
+  for(const post of data){
+
+    await renderPost(post,feed);
+  }
+}
+
+
+/* =====================================================
+   RENDER POST
+===================================================== */
+
+async function renderPost(post,container){
+
+  const profile = post.profiles;
+
+  const avatar =
+    profile?.avatar_url ||
+    "https://ui-avatars.com/api/?name=" +
+    encodeURIComponent(
+      profile?.display_name || "User"
+    );
+
+  let liked = false;
+  let likeCount = 0;
+
+  const { data:likes } =
+    await db
+      .from("likes")
+      .select("user_id")
+      .eq("post_id",post.id);
+
+  if(likes){
+
+    likeCount = likes.length;
+
+    liked =
+      !!currentUser &&
+      likes.some(
+        x => x.user_id === currentUser.id
+      );
+  }
+
+  const { data:comments } =
+    await db
+      .from("comments")
+      .select(`
+        id,
+        comment,
+        user_id,
+        created_at,
+        profiles (
+          username
+        )
+      `)
+      .eq("post_id",post.id)
+      .order("created_at",{ascending:true});
+
+  let commentsHTML = "";
+
+  if(comments && comments.length){
+
+    commentsHTML =
+      comments.map(c => `
+
+        <div class="comment">
+
+          <strong>
+            @${escapeHTML(
+              c.profiles?.username || "user"
+            )}
+          </strong>
+
+          ${escapeHTML(c.comment)}
+
+        </div>
+
+      `).join("");
+
+  }else{
+
+    commentsHTML =
+      `<div class="comment">No comments yet.</div>`;
+  }
+
+  const article =
+    document.createElement("article");
+
+  article.className = "post";
+
+  article.innerHTML = `
+
+    <div class="postHeader">
+
+      <img
+        class="avatar"
+        src="${escapeHTML(avatar)}"
+      >
+
+      <div>
+
+        <div class="postUser">
+          ${escapeHTML(
+            profile?.display_name || "User"
+          )}
+        </div>
+
+        <div class="postRank">
+          @${escapeHTML(
+            profile?.username || "user"
+          )}
+          • ${escapeHTML(
+            profile?.rank || "USER"
+          )}
+        </div>
+
+      </div>
+
+    </div>
+
+    <img
+      class="postImage"
+      src="${escapeHTML(post.image_url)}"
+      loading="lazy"
+    >
+
+    <div class="postBody">
+
+      <div class="postActions">
+
+        <button
+          class="actionBtn ${liked ? "liked":""}"
+          onclick="toggleLike(${post.id},this)"
+        >
+          ${liked ? "♥" : "♡"} ${likeCount}
+        </button>
+
+        <button
+          class="actionBtn"
+          onclick="copyPost('${escapeJS(post.image_url)}')"
+        >
+          ↗ Share
+        </button>
+
+      </div>
+
+      <div class="caption">
+
+        <strong>
+          @${escapeHTML(
+            profile?.username || "user"
+          )}
+        </strong>
+
+        ${escapeHTML(post.caption || "")}
+
+      </div>
+
+      <div class="comments">
+
+        ${commentsHTML}
+
+        <div class="commentBox">
+
+          <input
+            id="comment-${post.id}"
+            placeholder="Write a comment..."
+          >
+
+          <button
+            onclick="addComment(${post.id})"
+          >
+            Send
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  container.appendChild(article);
+}
+
+
+/* =====================================================
+   CREATE POST
+===================================================== */
+
+async function createPost(){
+
+  if(!currentUser){
+
+    alert("Pehle login karo.");
+    return;
+  }
+
+  const file =
+    document.getElementById("postImage")
+    .files[0];
+
+  const caption =
+    document.getElementById("postCaption")
+    .value.trim();
+
+  if(!file){
+
+    alert("Post ke liye image select karo.");
+    return;
+  }
+
+  if(file.size > 10 * 1024 * 1024){
+
+    alert("Image 10MB se chhoti honi chahiye.");
+    return;
+  }
+
+  const extension =
+    file.name.split(".").pop();
+
+  const filePath =
+    `${currentUser.id}/posts/${Date.now()}.${extension}`;
+
+  const { error:uploadError } =
+    await db.storage
+      .from("posts")
+      .upload(filePath,file,{
+        upsert:false
+      });
+
+  if(uploadError){
+
+    alert(uploadError.message);
+    return;
+  }
+
+  const { data:urlData } =
+    db.storage
+      .from("posts")
+      .getPublicUrl(filePath);
+
+  const imageURL =
+    urlData.publicUrl;
+
+  const { error:postError } =
+    await db
+      .from("posts")
+      .insert({
+
+        user_id:currentUser.id,
+
+        image_url:imageURL,
+
+        caption:caption
+      });
+
+  if(postError){
+
+    alert(postError.message);
+    return;
+  }
+
+  document.getElementById("postImage")
+    .value = "";
+
+  document.getElementById("postCaption")
+    .value = "";
+
+  document.getElementById("imagePreview")
+    .style.display = "none";
+
+  alert("🔥 Post uploaded!");
+
+  await loadFeed();
+}
+
+
+/* =====================================================
+   IMAGE PREVIEW
+===================================================== */
+
+function previewImage(event){
+
+  const file =
+    event.target.files[0];
+
+  const preview =
+    document.getElementById("imagePreview");
+
+  if(!file){
+
+    preview.style.display = "none";
+    return;
+  }
+
+  preview.src =
+    URL.createObjectURL(file);
+
+  preview.style.display = "block";
+}
+
+
+/* =====================================================
+   LIKE
+===================================================== */
+
+async function toggleLike(postId,button){
+
+  if(!currentUser){
+
+    alert("Login required.");
+    return;
+  }
+
+  const { data } =
+    await db
+      .from("likes")
+      .select("*")
+      .eq("post_id",postId)
+      .eq("user_id",currentUser.id)
+      .maybeSingle();
+
+  if(data){
+
+    await db
+      .from("likes")
+      .delete()
+      .eq("post_id",postId)
+      .eq("user_id",currentUser.id);
+
+  }else{
+
+    await db
+      .from("likes")
+      .insert({
+
+        post_id:postId,
+
+        user_id:currentUser.id
+      });
+  }
+
+  await loadFeed();
+}
+
+
+/* =====================================================
+   COMMENT
+===================================================== */
+
+async function addComment(postId){
+
+  if(!currentUser){
+
+    alert("Login required.");
+    return;
+  }
+
+  const input =
+    document.getElementById(
+      "comment-" + postId
+    );
+
+  const text =
+    input.value.trim();
+
+  if(!text) return;
+
+  const { error } =
+    await db
+      .from("comments")
+      .insert({
+
+        post_id:postId,
+
+        user_id:currentUser.id,
+
+        comment:text
+      });
+
+  if(error){
+
+    alert(error.message);
+    return;
+  }
+
+  input.value = "";
+
+  await loadFeed();
+}
+
+
+/* =====================================================
+   EDIT PROFILE
+===================================================== */
+
+function openEdit(){
+
+  if(!currentProfile) return;
+
+  document.getElementById("editName")
+    .value =
+    currentProfile.display_name || "";
+
+  document.getElementById("editBio")
+    .value =
+    currentProfile.bio || "";
+
+  document.getElementById("editModal")
+    .classList.remove("hidden");
+}
+
+
+function closeEdit(){
+
+  document.getElementById("editModal")
+    .classList.add("hidden");
+}
+
+
+async function saveProfile(){
+
+  const name =
+    document.getElementById("editName")
+    .value.trim();
+
+  const bio =
+    document.getElementById("editBio")
+    .value.trim();
+
+  const file =
+    document.getElementById("avatarFile")
+    .files[0];
+
+  if(!name){
+
+    alert("Name required.");
+    return;
+  }
+
+  let avatarURL =
+    currentProfile.avatar_url || "";
+
+  if(file){
+
+    const extension =
+      file.name.split(".").pop();
+
+    const path =
+      `${currentUser.id}/avatars/${Date.now()}.${extension}`;
+
+    const { error:uploadError } =
+      await db.storage
+        .from("posts")
+        .upload(path,file,{
+          upsert:false
+        });
+
+    if(uploadError){
+
+      alert(uploadError.message);
+      return;
+    }
+
+    const { data:urlData } =
+      db.storage
+        .from("posts")
+        .getPublicUrl(path);
+
+    avatarURL =
+      urlData.publicUrl;
+  }
+
+  const { error } =
+    await db
+      .from("profiles")
+      .update({
+
+        display_name:name,
+
+        bio:bio,
+
+        avatar_url:avatarURL
+
+      })
+      .eq("id",currentUser.id);
+
+  if(error){
+
+    alert(error.message);
+    return;
+  }
+
+  closeEdit();
+
+  await loadMyProfile();
+
+  alert("Profile updated!");
+}
+
+
+/* =====================================================
+   SEARCH USERS
+===================================================== */
+
+let searchTimer;
+
+
+function searchUsers(){
+
+  clearTimeout(searchTimer);
+
+  searchTimer =
+    setTimeout(doSearch,300);
+}
+
+
+async function doSearch(){
+
+  const q =
+    document.getElementById("searchInput")
+    .value
+    .trim()
+    .toLowerCase();
+
+  const result =
+    document.getElementById("searchResults");
+
+  if(!q){
+
+    result.innerHTML = "";
+    return;
+  }
+
+  const { data,error } =
+    await db
+      .from("profiles")
+      .select("*")
+      .ilike("username",`%${q}%`)
+      .limit(10);
+
+  if(error){
+
+    result.innerHTML = "";
+    return;
+  }
+
+  result.innerHTML =
+    data.map(p => `
+
+      <div
+        class="profileCard"
+        style="padding:15px"
+      >
+
+        <div class="profileTop">
+
+          <img
+            class="avatar"
+            src="${
+              escapeHTML(
+                p.avatar_url ||
+                "https://ui-avatars.com/api/?name="+
+                encodeURIComponent(p.display_name)
+              )
+            }"
+          >
+
+          <div class="profileInfo">
+
+            <h3>
+              ${escapeHTML(p.display_name)}
+            </h3>
+
+            <div class="username">
+              @${escapeHTML(p.username)}
+            </div>
+
+            <span class="rank">
+              ${escapeHTML(p.rank)}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `).join("");
+}
+
+
+/* =====================================================
+   MY PROFILE
+===================================================== */
+
+async function openMyProfile(){
+
+  await loadMyProfile();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+/* =====================================================
+   SHARE
+===================================================== */
+
+async function copyPost(url){
+
+  try{
+
+    await navigator.clipboard.writeText(url);
+
+    alert("Post link copied!");
+
+  }catch{
+
+    prompt("Copy this link:",url);
+  }
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+async function logout(){
+
+  await db.auth.signOut();
+
+  currentUser = null;
+  currentProfile = null;
+
+  document.getElementById("app")
+    .classList.add("hidden");
+
+  document.getElementById("authPage")
+    .classList.add("hidden");
+
+  document.getElementById("landing")
+    .classList.remove("hidden");
+}
+
+
+/* =====================================================
+   SECURITY HELPERS
+===================================================== */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+function escapeJS(value){
+
+  return String(value ?? "")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
+}
+
+
+/* =====================================================
+   CHECK EXISTING LOGIN
+===================================================== */
+
+async function checkSession(){
+
+  const { data } =
+    await db.auth.getSession();
+
+  if(data.session){
+
+    currentUser =
+      data.session.user;
+
+    await startApp();
+  }
+}
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+db.auth.onAuthStateChange(
+  async (event,session)=>{
+
+    if(session){
+
+      currentUser =
+        session.user;
+
+    }
+  }
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+checkSession();
+
+</script>
+
+</body>
+  </html>
